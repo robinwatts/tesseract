@@ -197,6 +197,7 @@ bool WeightMatrix::DeSerialize(bool training, TFile* fp) {
   if (int_mode_) {
     if (!wi_.DeSerialize(fp)) return false;
     if (!scales_.DeSerialize(fp)) return false;
+    scales_.scale((double)1.0/INT8_MAX);
     if (IntSimdMatrix::intSimdMatrix) {
       IntSimdMatrix::intSimdMatrix->Init(wi_, shaped_w_);
     }
